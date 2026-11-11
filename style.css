@@ -418,6 +418,25 @@ footer p {
     display: inline-block;
     margin-bottom: 8px;
     text-transform: uppercase;
+}@media (max-width: 768px) {
+  /* Reduce el tamaño del título principal en móviles */
+  header h1, .hero h1 {
+    font-size: 1.8rem !important;
+    line-height: 1.2;
+    padding: 0 10px;
+  }
+  
+  /* Ajusta el contenedor de las fotos y promociones */
+  .hero, .banner {
+    height: auto;
+    padding: 40px 15px;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 /* Responsivo para móviles y tablets */
