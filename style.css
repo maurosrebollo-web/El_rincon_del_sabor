@@ -1,0 +1,426 @@
+:root {
+    --font-main: 'Montserrat', sans-serif;
+    --color-navy: #0A1F44;
+    --color-deep-blue: #123C69;
+    --color-ocean: #2E88AB;
+    --color-sand-light: #F6F4E6;
+    --color-sand-gold: #D8A47F;
+    --color-terracotta: #C38D65;
+}
+
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    background-image: url('Fondo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--color-navy);
+    text-align: center;
+    font-weight: 400;
+}
+
+/* --- CABECERA FIJA SUPERIOR (STICKY) --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-image: linear-gradient(rgba(10, 31, 68, 0.4), rgba(10, 31, 68, 0.6)), url('banner_restaurante.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 180px; /* Reducido para que no ocupe media pantalla */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-deep-blue);
+    margin-top: 0;
+    letter-spacing: 0.5px;
+}
+
+p, label, span {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    background: rgba(246, 244, 230, 0.041);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    margin: 30px 0;
+    padding: 35px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(10, 31, 68, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.041);
+}
+
+/* BOTÓN FLOTANTE DE WHATSAPP */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #1eb956;
+    transform: scale(1.05);
+}
+
+/* CARRUSEL DE ESPECIALIDADES */
+.carousel-container {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(10, 31, 68, 0.15);
+    background: rgba(255, 255, 255, 0.459);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.027);
+}
+
+.carousel-slide {
+    display: none;
+    padding-bottom: 20px;
+}
+
+.carousel-slide.active {
+    display: block;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.carousel-details {
+    padding: 15px 20px;
+}
+
+.carousel-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    margin: 5px 0;
+}
+
+.carousel-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #333;
+    margin: 5px 0 12px 0;
+}
+
+.carousel-price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-terracotta);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: rgba(10, 31, 68, 0.6);
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.carousel-btn:hover { background-color: var(--color-ocean); }
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* PESTAÑAS DE NAVEGACIÓN DE LA CARTA */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background-color: rgba(246, 244, 230, 0.8);
+    border: 1px solid var(--color-ocean);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--color-deep-blue);
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background-color: var(--color-ocean);
+    color: white;
+    border-color: var(--color-ocean);
+}
+
+.sub-block-title {
+    text-align: left;
+    color: var(--color-deep-blue);
+    border-bottom: 2px solid var(--color-sand-gold);
+    padding-bottom: 6px;
+    margin: 30px 0 20px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* CUADRÍCULA (GRID) DE 4 PLATOS POR FILA */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: left;
+}
+
+.menu-card {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(10, 31, 68, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+}
+
+.menu-card-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.menu-card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.menu-card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-navy);
+    margin: 0 0 6px 0;
+}
+
+.menu-card-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: #555;
+    margin: 0 0 15px 0;
+    flex-grow: 1;
+}
+
+.menu-card-price {
+    font-weight: 700;
+    color: var(--color-terracotta);
+    font-size: 1.1rem;
+    margin-top: auto;
+}
+
+@media (max-width: 992px) {
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
+    .menu-grid { grid-template-columns: 1fr; }
+}
+
+/* PANEL DE ADMINISTRACIÓN */
+.admin-panel {
+    background: rgba(246, 244, 230, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px dashed var(--color-ocean);
+    padding: 25px;
+    margin-top: 35px;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.admin-panel h3 { margin-top: 0; color: var(--color-navy); }
+.admin-section { 
+    margin-bottom: 20px; 
+    background: rgba(255, 255, 255, 0.6); 
+    padding: 18px; 
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.88rem; color: var(--color-navy); }
+.form-group input, .form-group textarea, .form-group select {
+    width: 96%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.save-btn {
+    background-color: var(--color-deep-blue);
+    color: white;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover { background-color: var(--color-ocean); }
+
+footer {
+    background-color: rgba(10, 31, 68, 0.95);
+    color: var(--color-sand-light);
+    padding: 25px;
+}
+
+footer p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin: 0;
+}
+/* --- ESTILO PARA EL BOTÓN DE ELIMINAR PLATO --- */
+.delete-dish-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+    align-self: flex-start;
+}
+
+.delete-dish-btn:hover {
+    background-color: #c9302c;
+}/* --- SECCIÓN DE RESEÑAS DE GOOGLE Y TOP PLATOS --- */
+.reviews-grid, .top-dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.review-card, .top-dish-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(10, 31, 68, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stars {
+    color: #fbc02d; /* Color estrella de Google */
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.review-text {
+    font-size: 0.88rem;
+    font-style: italic;
+    color: #444;
+    margin-bottom: 12px;
+    flex-grow: 1;
+}
+
+.review-author {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-navy);
+}
+
+.top-dish-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.top-badge {
+    background-color: var(--color-terracotta);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* Responsivo para móviles y tablets */
+@media (max-width: 992px) {
+    .reviews-grid, .top-dishes-grid { grid-template-columns: 1fr; }
+}

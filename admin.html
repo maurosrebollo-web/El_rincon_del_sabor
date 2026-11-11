@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - El Rincón del Sabor</title>
+    
+    <!-- Fuente Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CABECERA DEL PANEL -->
+    <header style="height: 180px;">
+        <h1>Panel de Administración</h1>
+        <p style="font-size: 1rem; font-weight: 300;">Gestión interna de carta y sugerencias del restaurante</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- BARRA DE ACCESO RÁPIDO -->
+        <section style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <span style="font-weight: 600; color: var(--color-navy);">Vista del cliente sincronizada</span>
+            <a href="index.html" target="_blank" class="save-btn" style="text-decoration: none; background-color: var(--color-ocean);">🌐 Ver Página Pública en Vivo</a>
+        </section>
+
+        <!-- PANEL DE GESTIÓN -->
+        <div class="admin-panel" style="margin-top: 0;">
+            <h3 style="margin-top: 0; font-size: 1.4rem; color: var(--color-navy);">⚙️ Configuración del Negocio</h3>
+            
+            <!-- ADMINISTRAR CARRUSEL -->
+            <div class="admin-section" style="border: 2px solid var(--color-terracotta);">
+                <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--color-terracotta);">⭐ Gestionar Sugerencias del Día (Carrusel)</h3>
+                
+                <div class="form-group">
+                    <label>Nombre de la Sugerencia:</label>
+                    <input type="text" id="add-spec-name" placeholder="Ej: Arroz Señoret del Chef">
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea id="add-spec-desc" rows="2" placeholder="Ingredientes o detalles..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Precio (€):</label>
+                    <input type="text" id="add-spec-price" placeholder="15,00 €">
+                </div>
+                <div class="form-group">
+                    <label>Foto de la Sugerencia:</label>
+                    <input type="file" id="add-spec-img" accept="image/*">
+                </div>
+                <button class="save-btn" onclick="addSpecialItem()">Añadir al Carrusel</button>
+            </div>
+
+            <!-- CREAR SUBCATEGORÍA -->
+            <div class="admin-section">
+                <h3 style="font-size: 1.05rem; margin-top: 0;">1. Crear Nueva Subcategoría de Carta</h3>
+                <div class="form-group">
+                    <label>Categoría Principal:</label>
+                    <select id="new-sub-main-cat">
+                        <option value="entradas">Entradas</option>
+                        <option value="principales">Platos Principales</option>
+                        <option value="postres">Postres</option>
+                        <option value="cafeteria">Cafetería</option>
+                        <option value="bebidas">Bebidas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nombre del Subbloque:</label>
+                    <input type="text" id="new-sub-name" placeholder="Ej: Arroces del Mar, Bollería...">
+                </div>
+                <button class="save-btn" onclick="addSubCategory()">Crear Subcategoría</button>
+            </div>
+
+            <!-- AÑADIR PLATO -->
+            <div class="admin-section">
+                <h3 style="font-size: 1.05rem; margin-top: 0;">2. Añadir Plato o Producto a la Carta</h3>
+                <div class="form-group">
+                    <label>Categoría Principal:</label>
+                    <select id="add-dish-main-cat" onchange="updateSubCategorySelects()">
+                        <option value="entradas">Entradas</option>
+                        <option value="principales">Platos Principales</option>
+                        <option value="postres">Postres</option>
+                        <option value="cafeteria">Cafetería</option>
+                        <option value="bebidas">Bebidas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Subcategoría:</label>
+                    <select id="add-dish-sub-cat"></select>
+                </div>
+                <div class="form-group">
+                    <label>Nombre del Producto:</label>
+                    <input type="text" id="add-dish-name">
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea id="add-dish-desc" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Precio (€):</label>
+                    <input type="text" id="add-dish-price" placeholder="12,50 €">
+                </div>
+                <div class="form-group">
+                    <label>Foto:</label>
+                    <input type="file" id="add-dish-img" accept="image/*">
+                </div>
+                <button class="save-btn" onclick="addDishToMenu()">Añadir a la Carta</button>
+            </div>
+
+            <!-- VISTA PREVIA EDITABLE / ELIMINAR ELEMENTOS -->
+            <div class="admin-section" style="background: rgba(255,255,255,0.9);">
+                <h3 style="font-size: 1.05rem; margin-top: 0; color: var(--color-navy);">3. Listado y Eliminación de Platos Actuales</h3>
+                
+                <div class="tabs-nav" style="margin-bottom: 15px;">
+                    <button class="tab-btn active" onclick="switchAdminCategory('entradas', this)">Entradas</button>
+                    <button class="tab-btn" onclick="switchAdminCategory('principales', this)">Principales</button>
+                    <button class="tab-btn" onclick="switchAdminCategory('postres', this)">Postres</button>
+                    <button class="tab-btn" onclick="switchAdminCategory('cafeteria', this)">Cafetería</button>
+                    <button class="tab-btn" onclick="switchAdminCategory('bebidas', this)">Bebidas</button>
+                </div>
+                
+                <div id="admin-menu-list"></div>
+            </div>
+
+            <!-- BOTÓN DE RESETEAR -->
+            <div style="text-align: right; margin-top: 15px;">
+                <button onclick="resetData()" style="background: #999; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Restaurar Datos de Fábrica</button>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 El Rincón del Sabor. Panel de Control de Uso Exclusivo.</p>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT DEL PANEL DE ADMINISTRACIÓN -->
+    <script>
+        let defaultSpecials = [
+            { name: "Paella de Mariscos Tradicional", desc: "Cigalas, gambones y marisco fresco.", price: "14,50 €", img: "banner_restaurante.jpeg" },
+            { name: "Arroz a Banda con Alioli", desc: "Fondo concentrado de pescado de roca.", price: "13,00 €", img: "banner_restaurante.jpeg" }
+        ];
+
+        let defaultMenuData = {
+            entradas: {
+                "Entradas Frías": [
+                    { name: "Ensalada Mediterránea", desc: "Tomate de huerta, ventresca de atún y olivas.", price: "8,50 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Entradas Calientes": [
+                    { name: "Calamares a la Romana", desc: "Calamar de playa frito al estilo tradicional.", price: "9,50 €", img: "banner_restaurante.jpeg" },
+                    { name: "Clóchinas al Vapor", desc: "Mejillones locales con limón y pimienta.", price: "8,00 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            principales: {
+                "Arroces y Paellas": [
+                    { name: "Paella Valenciana Tradicional", desc: "Pollo, conejo, garrofó y bajoqueta.", price: "13,50 €", img: "banner_restaurante.jpeg" },
+                    { name: "Arroz Negro con Calamar", desc: "Con tinta natural de sepia y alioli.", price: "14,00 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Carnes y Pescados": [
+                    { name: "Entrecot de Ternera a la Parrilla", desc: "Con guarnición de patatas caseras.", price: "18,00 €", img: "banner_restaurante.jpeg" },
+                    { name: "Dorada a la Espalda", desc: "Pescado fresco del día al horno.", price: "16,50 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            postres: {
+                "Postres Caseros": [
+                    { name: "Flan de Huevo con Nata", desc: "Receta casera de la abuela.", price: "4,50 €", img: "banner_restaurante.jpeg" },
+                    { name: "Tarta de Queso Horneada", desc: "Con mermelada de frutos rojos.", price: "5,00 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            cafeteria: {
+                "Cafés e Infusiones": [
+                    { name: "Café Espresso", desc: "Café de grano natural 100% arábica.", price: "1,60 €", img: "banner_restaurante.jpeg" },
+                    { name: "Café con Leche", desc: "Servido con leche fresca de la región.", price: "1,90 €", img: "banner_restaurante.jpeg" },
+                    { name: "Infusión de Hierbas", desc: "Manzanilla, menta-poleo o té verde.", price: "1,80 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Bollería y Dulces": [
+                    { name: "Croissant de Mantequilla", desc: "Horneado del día, crujiente y tierno.", price: "2,20 €", img: "banner_restaurante.jpeg" },
+                    { name: "Tostada con Tomate y Aceite", desc: "Pan de pueblo tostado con AOVE y tomate triturado.", price: "2,80 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            bebidas: {
+                "Vinos y Cervezas": [
+                    { name: "Vino Blanco de la Casa (Botella)", desc: "D.O. Valencia.", price: "12,00 €", img: "banner_restaurante.jpeg" },
+                    { name: "Caña de Cerveza", desc: "Cerveza bien fría de grifo.", price: "2,50 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Refrescos": [
+                    { name: "Agua Mineral 1.5L", desc: "Con o sin gas.", price: "2,00 €", img: "banner_restaurante.jpeg" }
+                ]
+            }
+        };
+
+        let specials = JSON.parse(localStorage.getItem("rincon_specials")) || defaultSpecials;
+        let menuData = JSON.parse(localStorage.getItem("rincon_menuData")) || defaultMenuData;
+        let activeAdminCategory = "entradas";
+
+        function saveToLocalStorage() {
+            localStorage.setItem("rincon_specials", JSON.stringify(specials));
+            localStorage.setItem("rincon_menuData", JSON.stringify(menuData));
+        }
+
+        function addSpecialItem() {
+            const name = document.getElementById("add-spec-name").value.trim();
+            const desc = document.getElementById("add-spec-desc").value.trim();
+            const price = document.getElementById("add-spec-price").value.trim();
+            const fileInput = document.getElementById("add-spec-img");
+
+            if (!name || !price) {
+                alert("Por favor completa al menos el nombre y el precio de la sugerencia.");
+                return;
+            }
+
+            const saveSpecialWithImage = (imgPath) => {
+                specials.push({ name, desc, price, img: imgPath });
+                saveToLocalStorage();
+                alert(`¡Sugerencia "${name}" añadida al carrusel con éxito!`);
+                
+                document.getElementById("add-spec-name").value = "";
+                document.getElementById("add-spec-desc").value = "";
+                document.getElementById("add-spec-price").value = "";
+                document.getElementById("add-spec-img").value = "";
+            };
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    saveSpecialWithImage(e.target.result);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveSpecialWithImage("banner_restaurante.jpeg");
+            }
+        }
+
+        function switchAdminCategory(category, btnElement) {
+            activeAdminCategory = category;
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if(btnElement) btnElement.classList.add("active");
+            renderAdminMenu();
+        }
+
+        function renderAdminMenu() {
+            const container = document.getElementById("admin-menu-list");
+            container.innerHTML = "";
+
+            const categoryData = menuData[activeAdminCategory];
+
+            for (const subBlock in categoryData) {
+                const subTitle = document.createElement("div");
+                subTitle.className = "sub-block-title";
+                subTitle.textContent = subBlock;
+                container.appendChild(subTitle);
+
+                const grid = document.createElement("div");
+                grid.className = "menu-grid";
+
+                categoryData[subBlock].forEach((dish, dishIndex) => {
+                    const card = document.createElement("div");
+                    card.className = "menu-card";
+                    card.innerHTML = `
+                        <img src="${dish.img}" class="menu-card-img" alt="${dish.name}">
+                        <div class="menu-card-body">
+                            <div class="menu-card-title">${dish.name}</div>
+                            <div class="menu-card-desc">${dish.desc}</div>
+                            <div class="menu-card-price">${dish.price}</div>
+                            <button class="delete-dish-btn" onclick="deleteDish('${activeAdminCategory}', '${subBlock}', ${dishIndex})">🗑️ Eliminar</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                container.appendChild(grid);
+            }
+        }
+
+        function deleteDish(mainCat, subBlock, index) {
+            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                menuData[mainCat][subBlock].splice(index, 1);
+                saveToLocalStorage();
+                renderAdminMenu();
+                alert("¡Producto eliminado con éxito!");
+            }
+        }
+
+        function updateSubCategorySelects() {
+            const mainCat = document.getElementById("add-dish-main-cat").value;
+            const subSelect = document.getElementById("add-dish-sub-cat");
+            subSelect.innerHTML = "";
+
+            const subBlocks = Object.keys(menuData[mainCat]);
+            subBlocks.forEach(sub => {
+                const opt = document.createElement("option");
+                opt.value = sub;
+                opt.textContent = sub;
+                subSelect.appendChild(opt);
+            });
+        }
+
+        function addSubCategory() {
+            const mainCat = document.getElementById("new-sub-main-cat").value;
+            const subName = document.getElementById("new-sub-name").value.trim();
+
+            if (!subName) {
+                alert("Por favor introduce un nombre para la subcategoría.");
+                return;
+            }
+
+            if (!menuData[mainCat][subName]) {
+                menuData[mainCat][subName] = [];
+                saveToLocalStorage();
+                alert(`¡Subcategoría "${subName}" creada con éxito!`);
+                document.getElementById("new-sub-name").value = "";
+                updateSubCategorySelects();
+                renderAdminMenu();
+            } else {
+                alert("Esta subcategoría ya existe.");
+            }
+        }
+
+        function addDishToMenu() {
+            const mainCat = document.getElementById("add-dish-main-cat").value;
+            const subCat = document.getElementById("add-dish-sub-cat").value;
+            const name = document.getElementById("add-dish-name").value.trim();
+            const desc = document.getElementById("add-dish-desc").value.trim();
+            const price = document.getElementById("add-dish-price").value.trim();
+            const fileInput = document.getElementById("add-dish-img");
+
+            if (!name || !price || !subCat) {
+                alert("Por favor completa el nombre, subcategoría y precio del producto.");
+                return;
+            }
+
+            const saveWithImage = (imgPath) => {
+                menuData[mainCat][subCat].push({ name, desc, price, img: imgPath });
+                saveToLocalStorage();
+                alert(`¡Producto "${name}" añadido a la carta con éxito!`);
+                
+                document.getElementById("add-dish-name").value = "";
+                document.getElementById("add-dish-desc").value = "";
+                document.getElementById("add-dish-price").value = "";
+                document.getElementById("add-dish-img").value = "";
+
+                renderAdminMenu();
+            };
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    saveWithImage(e.target.result);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveWithImage("banner_restaurante.jpeg");
+            }
+        }
+
+        function resetData() {
+            if(confirm("¿Deseas restaurar los valores iniciales de fábrica?")) {
+                localStorage.removeItem("rincon_specials");
+                localStorage.removeItem("rincon_menuData");
+                location.reload();
+            }
+        }
+
+        window.onload = function() {
+            updateSubCategorySelects();
+            renderAdminMenu();
+        };
+    </script>
+</body>
+</html>

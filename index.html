@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Rincón del Sabor - Arroces y Cocina Mediterránea</title>
+    
+    <!-- Fuente Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/34600000000?text=Hola,%20quisiera%20consultar%20por%20una%20reserva" class="whatsapp-float" target="_blank">
+        💬 Reservar / Pedir
+    </a>
+
+    <!-- CABECERA STICKY -->
+    <header>
+        <h1>El Rincón del Sabor</h1>
+        <p style="font-size: 1.15rem; font-weight: 300;">Especialistas en arroces mediterráneos y productos del mar.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- ESPECIALIDADES (CARRUSEL) -->
+        <section>
+            <h2>⭐ Sugerencias del Día</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">❮</button>
+                <button class="carousel-btn next-btn" onclick="moveSlide(1)">❯</button>
+                <div id="carousel-slides-container"></div>
+            </div>
+        </section>
+
+        <!-- CARTA COMPLETA EN CUADRÍCULA -->
+        <section>
+            <h2>📜 Nuestra Carta</h2>
+            
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="switchCategory('entradas', this)">Entradas</button>
+                <button class="tab-btn" onclick="switchCategory('principales', this)">Platos Principales</button>
+                <button class="tab-btn" onclick="switchCategory('postres', this)">Postres</button>
+                <button class="tab-btn" onclick="switchCategory('cafeteria', this)">Cafetería</button>
+                <button class="tab-btn" onclick="switchCategory('bebidas', this)">Bebidas</button>
+            </div>
+
+            <div id="menu-content-container"></div>
+        </section>
+<!-- TOP 3 PLATOS MEJOR VALORADOS -->
+        <section>
+            <h2>🏆 Los 3 Favoritos de Nuestros Clientes</h2>
+            <p style="font-size: 0.95rem; font-weight: 300; margin-bottom: 20px;">Los platos más elogiados y pedidos por quienes nos visitan.</p>
+            
+            <div class="top-dishes-grid">
+                <div class="top-dish-card">
+                    <div>
+                        <span class="top-badge">⭐ 1º Más Pedido</span>
+                        <img src="banner_restaurante.jpeg" alt="Paella Valenciana">
+                        <div class="menu-card-title">Paella Valenciana Tradicional</div>
+                        <div class="menu-card-desc">"Imprescindible. El auténtico sabor a leña y producto fresco."</div>
+                    </div>
+                    <div class="menu-card-price" style="margin-top: 10px;">13,50 €</div>
+                </div>
+
+                <div class="top-dish-card">
+                    <div>
+                        <span class="top-badge">🥈 2º Favorito</span>
+                        <img src="banner_restaurante.jpeg" alt="Calamares a la Romana">
+                        <div class="menu-card-title">Calamares a la Romana</div>
+                        <div class="menu-card-desc">"Crujientes por fuera y súper tiernos por dentro. De 10."</div>
+                    </div>
+                    <div class="menu-card-price" style="margin-top: 10px;">9,50 €</div>
+                </div>
+
+                <div class="top-dish-card">
+                    <div>
+                        <span class="top-badge">🥉 3º Más Elegido</span>
+                        <img src="banner_restaurante.jpeg" alt="Tarta de Queso">
+                        <div class="menu-card-title">Tarta de Queso Horneada</div>
+                        <div class="menu-card-desc">"La mejor tarta de queso de toda la costa sin duda alguna."</div>
+                    </div>
+                    <div class="menu-card-price" style="margin-top: 10px;">5,00 €</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALIFICACIONES DE GOOGLE -->
+        <section>
+            <h2>⭐ Lo que dicen en Google Reviews</h2>
+            <p style="font-size: 0.95rem; font-weight: 300; margin-bottom: 20px;">Basado en más de 120 opiniones de clientes reales.</p>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <div class="review-text">"Comimos una paella excelente frente al mar. El servicio fue rapidísimo y muy atento. Repetiremos seguro en nuestras próximas vacaciones."</div>
+                    </div>
+                    <div class="review-author">— Carlos Martínez (Google Local Guide)</div>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <div class="review-text">"Un sitio increíble. El ambiente es muy acogedor y la comida casera de alta calidad. Los precios son muy razonables para estar en primera línea."</div>
+                    </div>
+                    <div class="review-author">— Sofía G. Benítez</div>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <div class="review-text">"Increíble descubrimiento. Pedimos los calamares y el arroz negro y estaban espectaculares. El trato del personal te hace sentir como en casa."</div>
+                    </div>
+                    <div class="review-author">— Javier R. Navarro</div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Horarios y Ubicación</h2>
+            <p><strong>🕒 Horarios:</strong> Martes a Domingo de 12:30 a 16:30 y de 20:00 a 23:30 (Lunes cerrado).</p>
+            <p><strong>📍 Dónde estamos:</strong> Calle Principal, junto a la playa.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 El Rincón del Sabor. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT PÚBLICA (Lee del localStorage compartido) -->
+    <script>
+        let defaultSpecials = [
+            { name: "Paella de Mariscos Tradicional", desc: "Cigalas, gambones y marisco fresco.", price: "14,50 €", img: "banner_restaurante.jpeg" },
+            { name: "Arroz a Banda con Alioli", desc: "Fondo concentrado de pescado de roca.", price: "13,00 €", img: "banner_restaurante.jpeg" }
+        ];
+
+        let defaultMenuData = {
+            entradas: {
+                "Entradas Frías": [
+                    { name: "Ensalada Mediterránea", desc: "Tomate de huerta, ventresca de atún y olivas.", price: "8,50 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Entradas Calientes": [
+                    { name: "Calamares a la Romana", desc: "Calamar de playa frito al estilo tradicional.", price: "9,50 €", img: "banner_restaurante.jpeg" },
+                    { name: "Clóchinas al Vapor", desc: "Mejillones locales con limón y pimienta.", price: "8,00 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            principales: {
+                "Arroces y Paellas": [
+                    { name: "Paella Valenciana Tradicional", desc: "Pollo, conejo, garrofó y bajoqueta.", price: "13,50 €", img: "banner_restaurante.jpeg" },
+                    { name: "Arroz Negro con Calamar", desc: "Con tinta natural de sepia y alioli.", price: "14,00 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Carnes y Pescados": [
+                    { name: "Entrecot de Ternera a la Parrilla", desc: "Con guarnición de patatas caseras.", price: "18,00 €", img: "banner_restaurante.jpeg" },
+                    { name: "Dorada a la Espalda", desc: "Pescado fresco del día al horno.", price: "16,50 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            postres: {
+                "Postres Caseros": [
+                    { name: "Flan de Huevo con Nata", desc: "Receta casera de la abuela.", price: "4,50 €", img: "banner_restaurante.jpeg" },
+                    { name: "Tarta de Queso Horneada", desc: "Con mermelada de frutos rojos.", price: "5,00 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            cafeteria: {
+                "Cafés e Infusiones": [
+                    { name: "Café Espresso", desc: "Café de grano natural 100% arábica.", price: "1,60 €", img: "banner_restaurante.jpeg" },
+                    { name: "Café con Leche", desc: "Servido con leche fresca de la región.", price: "1,90 €", img: "banner_restaurante.jpeg" },
+                    { name: "Infusión de Hierbas", desc: "Manzanilla, menta-poleo o té verde.", price: "1,80 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Bollería y Dulces": [
+                    { name: "Croissant de Mantequilla", desc: "Horneado del día, crujiente y tierno.", price: "2,20 €", img: "banner_restaurante.jpeg" },
+                    { name: "Tostada con Tomate y Aceite", desc: "Pan de pueblo tostado con AOVE y tomate triturado.", price: "2,80 €", img: "banner_restaurante.jpeg" }
+                ]
+            },
+            bebidas: {
+                "Vinos y Cervezas": [
+                    { name: "Vino Blanco de la Casa (Botella)", desc: "D.O. Valencia.", price: "12,00 €", img: "banner_restaurante.jpeg" },
+                    { name: "Caña de Cerveza", desc: "Cerveza bien fría de grifo.", price: "2,50 €", img: "banner_restaurante.jpeg" }
+                ],
+                "Refrescos": [
+                    { name: "Agua Mineral 1.5L", desc: "Con o sin gas.", price: "2,00 €", img: "banner_restaurante.jpeg" }
+                ]
+            }
+        };
+
+        let specials = JSON.parse(localStorage.getItem("rincon_specials")) || defaultSpecials;
+        let menuData = JSON.parse(localStorage.getItem("rincon_menuData")) || defaultMenuData;
+
+        let activeCategory = "entradas";
+        let currentSlide = 0;
+
+        function renderCarousel() {
+            const container = document.getElementById("carousel-slides-container");
+            container.innerHTML = "";
+            if(specials.length === 0) {
+                container.innerHTML = "<p style='padding:20px;'>No hay sugerencias disponibles.</p>";
+                return;
+            }
+            specials.forEach((dish, index) => {
+                const slide = document.createElement("div");
+                slide.className = `carousel-slide ${index === currentSlide ? 'active' : ''}`;
+                slide.innerHTML = `
+                    <img src="${dish.img}" class="carousel-img" alt="${dish.name}">
+                    <div class="carousel-details">
+                        <div class="carousel-title">${dish.name}</div>
+                        <div class="carousel-desc">${dish.desc}</div>
+                        <div class="carousel-price">${dish.price}</div>
+                    </div>
+                `;
+                container.appendChild(slide);
+            });
+        }
+
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll(".carousel-slide");
+            if(slides.length === 0) return;
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
+        function switchCategory(category, btnElement) {
+            activeCategory = category;
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if(btnElement) btnElement.classList.add("active");
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const container = document.getElementById("menu-content-container");
+            container.innerHTML = "";
+
+            const categoryData = menuData[activeCategory];
+
+            for (const subBlock in categoryData) {
+                const subTitle = document.createElement("div");
+                subTitle.className = "sub-block-title";
+                subTitle.textContent = subBlock;
+                container.appendChild(subTitle);
+
+                const grid = document.createElement("div");
+                grid.className = "menu-grid";
+
+                categoryData[subBlock].forEach((dish) => {
+                    const card = document.createElement("div");
+                    card.className = "menu-card";
+                    card.innerHTML = `
+                        <img src="${dish.img}" class="menu-card-img" alt="${dish.name}">
+                        <div class="menu-card-body">
+                            <div class="menu-card-title">${dish.name}</div>
+                            <div class="menu-card-desc">${dish.desc}</div>
+                            <div class="menu-card-price">${dish.price}</div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                container.appendChild(grid);
+            }
+        }
+
+        window.onload = function() {
+            renderCarousel();
+            renderMenu();
+        };
+    </script>
+</body>
+</html>
